@@ -40,16 +40,17 @@ def list_of_netprofit_deficit (ProfitAndLoss):
         for day, amount in sorted(deficit_days_and_amount): 
             print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
 
-    # iterate from 1 and to iterate over the indices of deficit_days_and_amount sequence
+    # iterate from 1 and to iterate through the list of deficit days and amounts
     for sequence in range(1, len(deficit_days_and_amount)): 
-        # to ensure the inner loop iterates over the remaining part of the list
+        # inner loop to compare the 2 adjacent elements in each iteration
         for sequence2 in range(len(deficit_days_and_amount)-sequence):
-            # check if the current amount is larger than the previous amount in the net profit deficit list
+            # check if the current amount is less than the previous amount in the net profit deficit list
             if deficit_days_and_amount [sequence2][1] < deficit_days_and_amount [sequence2+1][1]:
                 # the positions of the sublist will be swapped if it is true
                 deficit_days_and_amount[sequence2], deficit_days_and_amount[sequence2+1] = deficit_days_and_amount [sequence2+1], deficit_days_and_amount[sequence2]
 
-    for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
+    # rank variable keeps track of which iteration we are on, starting from 0 
+    for rank, (day, amount) in enumerate (deficit_days_and_amount): 
         if rank == 0:
             print(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
         elif rank == 1 :
