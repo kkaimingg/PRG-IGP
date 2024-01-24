@@ -35,13 +35,13 @@ def list_of_netprofit_deficit (ProfitAndLoss):
             # check if there was a net profit deficit 
             if prev_net_profit > net_profit: 
                 deficit_days_and_amount.append([day, prev_net_profit - net_profit])
-
+   
     # print out the days and amount for each deficit
-    for day, amount in deficit_days_and_amount: 
+    for day, amount in sorted(deficit_days_and_amount): 
         print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
 
     # iterate from 1 and to iterate over the indices of deficit_days_and_amount sequence
-        for sequence in range(1, len(deficit_days_and_amount)):
+        for sequence in range(1, len(deficit_days_and_amount)): 
         # to ensure the inner loop iterates over the remaining part of the list
             for sequence2 in range(len(deficit_days_and_amount)-sequence):
             # check if the current amount is larger than the previous amount in the net profit deficit list
