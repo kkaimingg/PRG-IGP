@@ -13,14 +13,16 @@ with open(fp, 'r', newline='') as csvfile:
     next(csv_reader)
 
     # Create variables to track the highest overheads
-    max_overheads = float('-inf')  # Initialize with negative infinity
+    max_overheads = float('-inf')  
+    # Initialize with negative infinity
     max_overhead_category = None
 
     # Iterate through the rows in the CSV file.
     for row in csv_reader:
         # Assuming the second column contains overheads
         category = row[0]
-        overheads = float(row[1])  # Convert to float for numeric comparison
+        # Convert to float for numeric comparison
+        overheads = float(row[1])  
 
         # Check if the current overheads are higher than the current maximum
         if overheads > max_overheads:
