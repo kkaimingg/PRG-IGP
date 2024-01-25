@@ -12,21 +12,33 @@ with open(fp, 'r', newline='') as csvfile:
     # Skip header
     next(csv_reader)
 
-    # Create an empty list for overheads
-    overheads_list = []
+    # Create variables to track the highest overheads
+    max_overheads = float('-inf')  # Initialize with negative infinity
+    max_overhead_category = None
 
     # Iterate through the rows in the CSV file.
     for row in csv_reader:
         # Assuming the second column contains overheads
-        overheads_list.append({
-            'Category': row[0],
-            'Overheads': float(row[1])  # Convert to float for numeric comparison
-        })
+        category = row[0]
+        overheads = float(row[1])  # Convert to float for numeric comparison
 
-# Find the category with the highest overheads
-highest_overhead_category = max(overheads_list, key=lambda x: x['Overheads'])
+        # Check if the current overheads are higher than the current maximum
+        if overheads > max_overheads:
+            max_overheads = overheads
+            max_overhead_category = category
+
+        # Example of additional conditions
+        if overheads > 10:
+            print(f"Category '{category}' has high overheads: {overheads}")
+
+        if 'Expense' in category:
+            print(f"Category '{category}' is an expense category.")
 
 # Print the result
-print(f"The category with the highest overheads is: {highest_overhead_category['Category']} with {highest_overhead_category['Overheads']} overheads.")
+if max_overhead_category is not None:
+    print(f"The category with the highest overheads is: {max_overhead_category} with {max_overheads} overheads.")
+else:
+    print("No data found.")
+
 
 
