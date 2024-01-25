@@ -25,6 +25,7 @@ def list_of_netprofit_deficit (ProfitAndLoss):
     - the function takes in the list of the profit and loss 
     - the function returns the list of the days where there were the net profit deficit and the amount 
     '''
+    # an empty list to store the deficit days and the amount
     deficit_days_and_amount = []
 
     for Current_Day , (day, net_profit) in enumerate (ProfitAndLoss):
@@ -35,10 +36,10 @@ def list_of_netprofit_deficit (ProfitAndLoss):
             # check if there was a net profit deficit 
             if prev_net_profit > net_profit: 
                 deficit_days_and_amount.append([day, prev_net_profit - net_profit])
-   
+
     # print out the days and amount for each deficit
-        for day, amount in sorted(deficit_days_and_amount): 
-            print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
+    for day, amount in deficit_days_and_amount: 
+        print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
 
     # iterate from 1 and to iterate through the list of deficit days and amounts
     for sequence in range(1, len(deficit_days_and_amount)): 
