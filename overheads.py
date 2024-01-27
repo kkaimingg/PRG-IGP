@@ -27,10 +27,11 @@ with open(fp, 'r', newline='') as csvfile:
         if overheads > max_overheads:
             max_overheads = overheads
             max_overhead_category = category
+            max_overhead_category=max_overhead_category.upper()
 
 # Print the result
 if max_overhead_category is not None:
-    print(f"HIGHEST OVERHEADS: {max_overhead_category} with {max_overheads} overheads.")
+    print(f"[HIGHEST OVERHEAD] {max_overhead_category}: {max_overheads}%")
 else:
     print("No data found.")
 
