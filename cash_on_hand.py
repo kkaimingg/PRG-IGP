@@ -46,7 +46,7 @@ def cash_on_hand_calculator():
     output = ""
     if not cash_deficit:
         output += "[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n"
-        output += f"[HIGHEST CASH SURPLUS] DAY: {highest_surplus[0]}, AMOUNT: USD{highest_surplus[1]}\n"
+        output += f"[HIGHEST CASH SURPLUS] DAY: {highest_surplus[0]}, AMOUNT: SGD{highest_surplus[1]}\n"
     else:
         # swapping second element and first element place in the list to use .sort function row[0] -> row[1],  row[1] ->row[0]
         cash_deficit_swapped = [[item[1],item[0]] for item in cash_deficit]
@@ -56,17 +56,17 @@ def cash_on_hand_calculator():
         # code to print results for scenario 2
         if not surplus:
             output += "[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n"
-            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: USD{cash_deficit_swapped[0][0]}\n"
+            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
 
         # code to print results for scenario 3
         else:
             for deficit in cash_deficit:
-                output += f"[CASH DEFICIT] DAY: {deficit[0]}, AMOUNT: USD{deficit[1]}\n"
+                output += f"[CASH DEFICIT] DAY: {deficit[0]}, AMOUNT: SGD{deficit[1]}\n"
 
             # print results for top 3 highest cash deficit
-            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: USD{cash_deficit_swapped[0][0]}\n"
-            output += f"[2ND HIGHEST CASH DEFICIT] DAY:{cash_deficit_swapped[1][1]}, AMOUNT: USD{cash_deficit_swapped[1][0]}\n"
-            output += f"[3RD HIGHEST CASH DEFICIT] DAY: {cash_deficit_swapped[2][1]}, AMOUNT: USD{cash_deficit_swapped[2][0]}\n"
+            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
+            output += f"[2ND HIGHEST CASH DEFICIT] DAY:{cash_deficit_swapped[1][1]}, AMOUNT: SGD{cash_deficit_swapped[1][0]}\n"
+            output += f"[3RD HIGHEST CASH DEFICIT] DAY: {cash_deficit_swapped[2][1]}, AMOUNT: SGD{cash_deficit_swapped[2][0]}\n"
     
     
     return output
