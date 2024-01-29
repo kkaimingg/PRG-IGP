@@ -4,10 +4,10 @@ import csv
 
 def cash_on_hand_calculator():
     # create a file path to csv file
-    fp = Path.cwd()/"Cash-on-Hand.csv"
+    fp = Path.cwd()/"csv_reports" / "Cash-on-Hand.csv"
 
     # read the csv file
-    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+    with fp.open(mode="r", encoding="UTF-8") as file:
         reader = csv.reader(file)
         next(reader) # skip header
 
@@ -23,7 +23,6 @@ def cash_on_hand_calculator():
     #create list for cash deficit 
     cash_deficit = []
 
-  
 
     # create list for highest cash surplus, putting day 11 values in first as the base
     highest_surplus = [cash_on_hand[0][0], 0]
@@ -39,38 +38,41 @@ def cash_on_hand_calculator():
         else:
             # append cash deficit to cash deficit list
             cash_deficit.append([cash_on_hand[i][0], -surplus])
-    print(cash_deficit)
-    print(sorted(cash_deficit))
+    return(cash_deficit , surplus , highest_surplus)
+
+
+    # print(cash_deficit)
+    # print(sorted(cash_deficit))
             
-    # code to print results for scenario 1
-    output = ""
-    if not cash_deficit:
-        output += "[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n"
-        output += f"[HIGHEST CASH SURPLUS] DAY: {highest_surplus[0]}, AMOUNT: SGD{highest_surplus[1]}\n"
-    else:
-        # swapping second element and first element place in the list to use .sort function row[0] -> row[1],  row[1] ->row[0]
-        cash_deficit_swapped = [[item[1],item[0]] for item in cash_deficit]
-        # sorting by highest amount to lowest amount
-        cash_deficit_swapped.sort(reverse=True)
+    # # code to print results for scenario 1 so we can check
+    # output = ""
+    # if not cash_deficit:
+    #     output += "[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n"
+    #     output += f"[HIGHEST CASH SURPLUS] DAY: {highest_surplus[0]}, AMOUNT: SGD{highest_surplus[1]}\n"
+    # else:
+    #     # swapping second element and first element place in the list to use .sort function row[0] -> row[1],  row[1] ->row[0]
+    #     cash_deficit_swapped = [[item[1],item[0]] for item in cash_deficit]
+    #     # sorting by highest amount to lowest amount
+    #     cash_deficit_swapped.sort(reverse=True)
 
-        # code to print results for scenario 2
-        if not surplus:
-            output += "[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n"
-            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
+    #     # code to print results for scenario 2 so we can check
+    #     if not surplus:
+    #         output += "[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n"
+    #         output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
 
-        # code to print results for scenario 3
-        else:
-            for deficit in cash_deficit:
-                output += f"[CASH DEFICIT] DAY: {deficit[0]}, AMOUNT: SGD{deficit[1]}\n"
+    #     # code to print results for scenario 3 so we can check
+    #     else:
+    #         for deficit in cash_deficit:
+    #             output += f"[CASH DEFICIT] DAY: {deficit[0]}, AMOUNT: SGD{deficit[1]}\n"
 
-            # print results for top 3 highest cash deficit
-            output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
-            output += f"[2ND HIGHEST CASH DEFICIT] DAY:{cash_deficit_swapped[1][1]}, AMOUNT: SGD{cash_deficit_swapped[1][0]}\n"
-            output += f"[3RD HIGHEST CASH DEFICIT] DAY: {cash_deficit_swapped[2][1]}, AMOUNT: SGD{cash_deficit_swapped[2][0]}\n"
+    #         # print results for top 3 highest cash deficit
+    #         output += f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n"
+    #         output += f"[2ND HIGHEST CASH DEFICIT] DAY:{cash_deficit_swapped[1][1]}, AMOUNT: SGD{cash_deficit_swapped[1][0]}\n"
+    #         output += f"[3RD HIGHEST CASH DEFICIT] DAY: {cash_deficit_swapped[2][1]}, AMOUNT: SGD{cash_deficit_swapped[2][0]}\n"
     
     
-    return output
-print(cash_on_hand_calculator())
+    # return output
+
 
 
 
