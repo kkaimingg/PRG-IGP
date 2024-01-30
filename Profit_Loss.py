@@ -39,6 +39,36 @@ def list_of_netprofit_deficit ():
             if prev_net_profit > net_profit: 
                 deficit_days_and_amount.append([day, prev_net_profit - net_profit])
 
+    return(deficit_days_and_amount)
+# call the function to get the deficit_days_and_amount list
+list_of_netprofit_deficit()
+
+def profit_loss_append_file(deficit_days_and_amount):
+
+    from pathlib import Path
+    # create a path object for my text file
+    file_path = Path.cwd()/"summary_report.txt" 
+
+    # create the file if it doesn't exist 
+    file_path.touch() 
+
+    with file_path.open(mode = "a" , encoding="UTF-8") as file: 
+        
+        # write results to summary_report.txt 
+        with open('summary_report.txt', 'a') as file: 
+
+            for day, amount in deficit_days_and_amount: 
+                file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+
+            for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
+                if rank == 0:
+                    file.write(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+                elif rank == 1 :
+                    file.write(f"[2ND HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+                elif rank == 2:
+                    file.write(f"[3RD HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")   
+            
+
     # print out the days and amount for each deficit for checking purposes
     # for day, amount in deficit_days_and_amount: 
     #     print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
@@ -59,6 +89,3 @@ def list_of_netprofit_deficit ():
     #         print (f"[2ND HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
     #     elif rank == 2:
     #         print (f"[3RD HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
-    return(deficit_days_and_amount)
-# call the function to get the deficit_days_and_amount list
-list_of_netprofit_deficit()

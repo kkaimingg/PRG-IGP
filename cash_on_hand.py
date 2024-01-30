@@ -3,6 +3,7 @@ import csv
 
 
 def cash_on_hand_calculator():
+
     # create a file path to csv file
     fp = Path.cwd()/"csv_reports" / "Cash-on-Hand.csv"
 
@@ -40,6 +41,46 @@ def cash_on_hand_calculator():
             cash_deficit.append([cash_on_hand[i][0], -surplus])
     return(cash_deficit , surplus , highest_surplus)
 
+def cash_on_hand_append_file(cash_deficit, surplus, highest_surplus):
+
+    from pathlib import Path
+    # create a path object for my text file
+    
+    file_path = Path.cwd()/"summary_report.txt" 
+
+    
+    # create the file if it doesn't exist 
+    file_path.touch() 
+
+    with file_path.open(mode = "a" , encoding="UTF-8") as file: 
+        
+        # write results to summary_report.txt 
+        with open('summary_report.txt', 'a') as file: 
+
+            output = ""
+            if not cash_deficit:
+                file.write ("[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY\n")
+                file.write (f"[HIGHEST CASH SURPLUS] DAY: {highest_surplus[0]}, AMOUNT: SGD{highest_surplus[1]}\n")
+            else:
+                # swapping second element and first element place in the list to use .sort function row[0] -> row[1],  row[1] ->row[0]
+                cash_deficit_swapped = [[item[1],item[0]] for item in cash_deficit]
+                # sorting by highest amount to lowest amount
+                cash_deficit_swapped.sort(reverse=True)
+
+                # code to print results for scenario 2 so we can check
+                if not surplus:
+                    file.write ("[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n")
+                    file.write (f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n")
+
+                # code to print results for scenario 3 so we can check
+                else:
+                    for deficit in cash_deficit:
+                        file.write (f"[CASH DEFICIT] DAY: {deficit[0]}, AMOUNT: SGD{deficit[1]}\n")
+
+                    # print results for top 3 highest cash deficit
+                    file.write (f"[HIGHEST CASH DEFICIT] DAY :{cash_deficit_swapped[0][1]}, AMOUNT: SGD{cash_deficit_swapped[0][0]}\n")
+                    file.write (f"[2ND HIGHEST CASH DEFICIT] DAY:{cash_deficit_swapped[1][1]}, AMOUNT: SGD{cash_deficit_swapped[1][0]}\n")
+                    file.write (f"[3RD HIGHEST CASH DEFICIT] DAY: {cash_deficit_swapped[2][1]}, AMOUNT: SGD{cash_deficit_swapped[2][0]}\n")    
 
     # print(cash_deficit)
     # print(sorted(cash_deficit))
