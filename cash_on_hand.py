@@ -4,7 +4,7 @@ import csv
 
 def cash_on_hand_calculator():
     # create a file path to csv file
-    fp = Path.cwd()/"Cash-on-Hand.csv"
+    fp = Path.cwd()/"csv_reports"/"Cash-on-Hand.csv"
 
     # read the csv file
     with fp.open(mode="r", encoding="UTF-8", newline="") as file:
