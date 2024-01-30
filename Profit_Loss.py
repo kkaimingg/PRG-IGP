@@ -43,6 +43,18 @@ def list_of_netprofit_deficit ():
 # call the function to get the deficit_days_and_amount list
 list_of_netprofit_deficit()
 
+def write_profit_loss(deficit_days_and_amount, file):
+    for day, amount in deficit_days_and_amount: 
+                file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+
+    for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
+        if rank == 0:
+            file.write(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+        elif rank == 1 :
+            file.write(f"[2ND HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+        elif rank == 2:
+            file.write(f"[3RD HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")   
+
 def profit_loss_append_file(deficit_days_and_amount):
 
     file_path = Path.cwd() / "summary_report.txt"
@@ -51,34 +63,16 @@ def profit_loss_append_file(deficit_days_and_amount):
     if file_path.exists():
         # If the file exists, open it in append mode
         with file_path.open(mode="a", encoding="UTF-8") as file:
-            for day, amount in deficit_days_and_amount: 
-                file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-
-            for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
-                if rank == 0:
-                    file.write(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-                elif rank == 1 :
-                    file.write(f"[2ND HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-                elif rank == 2:
-                    file.write(f"[3RD HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")   
+            write_profit_loss(deficit_days_and_amount, file)
     else:
         # If the file does not exist, create it using touch() and write the results
         file_path.touch()
         with file_path.open(mode="w", encoding="UTF-8") as file:
-            for day, amount in deficit_days_and_amount: 
-                file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-
-            for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
-                if rank == 0:
-                    file.write(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-                elif rank == 1 :
-                    file.write(f"[2ND HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
-                elif rank == 2:
-                    file.write(f"[3RD HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")   
+           write_profit_loss(deficit_days_and_amount, file)
         
 
 
-    # print out the days and amount for each deficit for checking purposes
+# print out the days and amount for each deficit for checking purposes
     # for day, amount in deficit_days_and_amount: 
     #     print(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}")
 
