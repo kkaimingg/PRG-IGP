@@ -39,8 +39,8 @@ def cash_on_hand_calculator():
         else:
             # append cash deficit to cash deficit list
             cash_deficit.append([cash_on_hand[i][0], -surplus])
-    print(cash_deficit)
-    print(sorted(cash_deficit))
+    # print(cash_deficit)
+    # print(sorted(cash_deficit))
             
     # code to print results for scenario 1
     output = ""
