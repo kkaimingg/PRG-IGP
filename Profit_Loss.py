@@ -45,7 +45,7 @@ list_of_netprofit_deficit()
 
 def write_profit_loss(deficit_days_and_amount, file):
     for day, amount in deficit_days_and_amount: 
-                file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
+        file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
 
     for sequence in range(1, len(deficit_days_and_amount)):
     #to ensure the inner loop iterates over the remaining part of the list
