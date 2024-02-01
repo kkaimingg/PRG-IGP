@@ -47,6 +47,14 @@ def write_profit_loss(deficit_days_and_amount, file):
     for day, amount in deficit_days_and_amount: 
                 file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
 
+    for sequence in range(1, len(deficit_days_and_amount)):
+    #to ensure the inner loop iterates over the remaining part of the list
+        for sequence2 in range(len(deficit_days_and_amount)-sequence):
+            # check if the current amount is larger than the previous amount in the net profit deficit list
+            if deficit_days_and_amount [sequence2][1] < deficit_days_and_amount [sequence2+1][1]:
+                # the positions of the sublist will be swapped if it is true
+                deficit_days_and_amount[sequence2], deficit_days_and_amount[sequence2+1] = deficit_days_and_amount [sequence2+1], deficit_days_and_amount[sequence2]
+
     for rank, (day, amount) in enumerate (deficit_days_and_amount[:3]): 
         if rank == 0:
             file.write(f"[HIGHEST NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{amount}\n")
